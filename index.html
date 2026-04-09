@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>아기 이유식 레시피북</title>
+  <meta name="description" content="아기 이유식 레시피를 영상과 함께 공유하는 페이지입니다.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+  <header class="hero">
+    <p class="hero-kicker">RECIPE NOTE</p>
+    <h1>맘스터치 레시피북</h1>
+    <p>냠냠뱀뱀 동호회 엄마들이 만드는 수제 유아식</p>
+  </header>
+
+  <main class="container">
+    <section class="intro card reveal">
+      <h2>읽는 순서</h2>
+      <p>레시피는 글을 먼저 읽고, 영상은 아래에서 확인하도록 구성되어 있어요.</p>
+    </section>
+
+    <section class="recipes">
+      <h2>레시피 목록</h2>
+      <ul class="recipe-grid">
+        <li class="card reveal">
+          <p class="label">첫 번째 레시피</p>
+          <h3>파프리카 물김치</h3>
+          <p>재료와 조리과정을 먼저 읽고, 하단 영상으로 흐름을 확인하세요.</p>
+          <a class="btn" href="recipes/paprika-mulkimchi.html">상세 보기</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>이 사이트는 GitHub Pages로 배포할 수 있는 정적 웹페이지입니다.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

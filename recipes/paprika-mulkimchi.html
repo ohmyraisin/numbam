@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>파프리카 물김치 | 아기 이유식 레시피북</title>
+  <meta name="description" content="파프리카 물김치 이유식 레시피입니다.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="recipe-main">
+    <header class="recipe-head reveal">
+      <a class="btn" href="../index.html">목록으로 돌아가기</a>
+      <h1>파프리카 물김치</h1>
+      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상으로 확인하세요.</p>
+    </header>
+
+    <section class="card recipe-text reveal">
+      <h2>재료</h2>
+      <ul>
+        <li>파프리카 1개</li>
+        <li>무 80g</li>
+        <li>물 300ml</li>
+        <li>아기용 저염 소금 약간</li>
+      </ul>
+
+      <h2>조리과정</h2>
+      <ol>
+        <li>파프리카와 무를 깨끗이 씻고 얇게 썰어요.</li>
+        <li>냄비에 물을 넣고 재료를 살짝 데친 뒤 식혀요.</li>
+        <li>식힌 물에 저염 소금을 아주 소량 넣고 간을 맞춰요.</li>
+        <li>재료를 용기에 담고 국물을 부어 냉장 보관해요.</li>
+      </ol>
+    </section>
+
+    <section class="card video-wrap reveal" aria-label="조리 영상">
+      <h2>영상</h2>
+      <iframe
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="파프리카 물김치 조리 영상"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
