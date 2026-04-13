@@ -1,7 +1,7 @@
 ---
 title: 양파풋귤절임
 slug: greentangerine
-blog_url: https://m.blog.naver.com/bebe_moo/223832655179
+image_url: ../assets/images/양파풋귤절임.jpeg
 tags: 절임, 김치, 양파, 귤
 summary: 양파와 풋귤즙으로 만드는 절임 반찬 레시피입니다.
 ---

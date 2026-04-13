@@ -1,7 +1,8 @@
 ---
 title: 노계란 뇨끼
 slug: gnocchi
-blog_url: https://m.blog.naver.com/bebe_moo/223832655179
+image_urls: ../assets/images/노계란뇨끼2.jpeg, ../assets/images/노계란뇨끼1.jpeg
+image_alts: 반죽 전 뇨끼 재료 이미지, 노계란 뇨끼 완성 이미지
 tags: 감자, 노계란, 뇨끼
 summary: 계란 없이 만드는 감자 뇨끼 레시피입니다.
 ---

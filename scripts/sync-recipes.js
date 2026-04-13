@@ -116,15 +116,19 @@ function renderList(items, type) {
   return `      <${tag}>\n${listItems}\n      </${tag}>`;
 }
 
-function parseTags(value) {
+function parseCommaValues(value) {
   if (!value) {
     return [];
   }
 
   return value
     .split(',')
-    .map((tag) => tag.trim())
+    .map((item) => item.trim())
     .filter(Boolean);
+}
+
+function parseTags(value) {
+  return parseCommaValues(value);
 }
 
 function renderTags(tags, className = 'tag-list') {
@@ -176,7 +180,7 @@ function updateIndexRecipeCards(recipes) {
   logVerbose(`index 카드 자동 갱신: ${recipes.length}개`);
 }
 
-function buildRecipeSummary(frontmatter, youtubeUrl, blogUrl) {
+function buildRecipeSummary(frontmatter, youtubeUrl, blogUrl, imageUrls) {
   if (frontmatter.summary) {
     return frontmatter.summary;
   }
@@ -189,32 +193,53 @@ function buildRecipeSummary(frontmatter, youtubeUrl, blogUrl) {
     return '재료와 순서를 먼저 확인하고, 참고 링크를 통해 원문을 볼 수 있어요.';
   }
 
+  if (imageUrls.length) {
+    return '재료와 순서를 먼저 확인하고, 하단 이미지를 참고해 주세요.';
+  }
+
   return '재료와 조리과정을 확인해 보세요.';
 }
 
-// 링크 영역은 우선순위대로 렌더링한다: YouTube iframe > blog 링크 > 안내 문구.
-function renderLinkSection(title, youtubeUrl, blogUrl) {
+// 외부 콘텐츠 영역(영상/블로그/이미지)을 조합해 렌더링한다.
+function renderContentSections(title, youtubeUrl, blogUrl, imageUrls, imageAlts) {
   const videoId = getYoutubeVideoId(youtubeUrl || '');
   const safeTitle = escapeHtml(title);
+  const sections = [];
 
   if (videoId) {
-    return `    <section class="card video-wrap reveal" aria-label="조리 영상">\n      <h2>영상</h2>\n      <iframe\n        src="https://www.youtube.com/embed/${escapeHtml(videoId)}"\n        title="${safeTitle} 조리 영상"\n        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"\n        referrerpolicy="strict-origin-when-cross-origin"\n        allowfullscreen>\n      </iframe>\n    </section>`;
+    sections.push(`    <section class="card video-wrap reveal" aria-label="조리 영상">\n      <h2>영상</h2>\n      <iframe\n        src="https://www.youtube.com/embed/${escapeHtml(videoId)}"\n        title="${safeTitle} 조리 영상"\n        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"\n        referrerpolicy="strict-origin-when-cross-origin"\n        allowfullscreen>\n      </iframe>\n    </section>`);
   }
 
   if (blogUrl) {
-    return `    <section class="card video-wrap reveal" aria-label="참고 링크">\n      <h2>참고 링크</h2>\n      <a href="${escapeHtml(blogUrl)}" target="_blank" rel="noopener noreferrer" class="btn">블로그에서 보기</a>\n    </section>`;
+    sections.push(`    <section class="card video-wrap reveal" aria-label="블로그 링크">\n      <h2>블로그 링크</h2>\n      <a href="${escapeHtml(blogUrl)}" target="_blank" rel="noopener noreferrer" class="btn">블로그에서 보기</a>\n    </section>`);
   }
 
-  return `    <section class="card video-wrap reveal" aria-label="안내">\n      <h2>참고</h2>\n      <p>연결된 영상 또는 링크가 없습니다.</p>\n    </section>`;
+  if (imageUrls.length) {
+    const imagesMarkup = imageUrls
+      .map((imageUrl, index) => {
+        const fallbackAlt = `${title} 참고 이미지 ${index + 1}`;
+        const imageAlt = imageAlts[index] || fallbackAlt;
+        return `        <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(imageAlt)}" loading="lazy" decoding="async">`;
+      })
+      .join('\n');
+
+    sections.push(`    <section class="card media-wrap reveal" aria-label="참고 이미지">\n      <h2>이미지</h2>\n      <div class="media-grid">\n${imagesMarkup}\n      </div>\n    </section>`);
+  }
+
+  if (sections.length) {
+    return sections.join('\n\n');
+  }
+
+  return `    <section class="card video-wrap reveal" aria-label="안내">\n      <h2>참고</h2>\n      <p>연결된 영상, 블로그 링크, 이미지가 없습니다.</p>\n    </section>`;
 }
 
 // 레시피 한 건의 최종 HTML 문서를 템플릿으로 생성한다.
-function buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, tags }) {
+function buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, imageUrls, imageAlts, tags }) {
   const safeTitle = escapeHtml(title);
   const description = escapeHtml(`${title} 이유식 레시피입니다.`);
   const tagsMarkup = renderTags(tags, 'tag-list recipe-tags');
 
-  return `<!doctype html>\n<html lang="ko">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>${safeTitle} | 아기 이유식 레시피북</title>\n  <meta name="description" content="${description}">\n  <meta name="robots" content="noindex, nofollow">\n  <link rel="stylesheet" href="../assets/styles.css">\n</head>\n<body>\n  <div class="page-bg" aria-hidden="true"></div>\n\n  <main class="recipe-main">\n    <header class="recipe-head reveal">\n      <a class="btn" href="../index.html">목록으로 돌아가기</a>\n      <h1>${safeTitle}</h1>\n      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상 또는 참고 링크를 확인하세요.</p>\n${tagsMarkup ? `${tagsMarkup}\n` : ''}    </header>\n\n    <section class="card recipe-text reveal">\n      <h2>재료</h2>\n${renderList(ingredients, 'ul')}\n\n      <h2>조리과정</h2>\n${renderList(steps, 'ol')}\n    </section>\n\n${renderLinkSection(title, youtubeUrl, blogUrl)}\n  </main>\n\n  <script>\n    const observer = new IntersectionObserver((entries) => {\n      for (const entry of entries) {\n        if (entry.isIntersecting) {\n          entry.target.classList.add('show');\n          observer.unobserve(entry.target);\n        }\n      }\n    }, { threshold: 0.15 });\n\n    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));\n  </script>\n</body>\n</html>\n`;
+  return `<!doctype html>\n<html lang="ko">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>${safeTitle} | 아기 이유식 레시피북</title>\n  <meta name="description" content="${description}">\n  <meta name="robots" content="noindex, nofollow">\n  <link rel="stylesheet" href="../assets/styles.css">\n</head>\n<body>\n  <div class="page-bg" aria-hidden="true"></div>\n\n  <main class="recipe-main">\n    <header class="recipe-head reveal">\n      <a class="btn" href="../index.html">목록으로 돌아가기</a>\n      <h1>${safeTitle}</h1>\n      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상/블로그/이미지를 확인하세요.</p>\n${tagsMarkup ? `${tagsMarkup}\n` : ''}    </header>\n\n    <section class="card recipe-text reveal">\n      <h2>재료</h2>\n${renderList(ingredients, 'ul')}\n\n      <h2>조리과정</h2>\n${renderList(steps, 'ol')}\n    </section>\n\n${renderContentSections(title, youtubeUrl, blogUrl, imageUrls, imageAlts)}\n  </main>\n\n  <script>\n    const observer = new IntersectionObserver((entries) => {\n      for (const entry of entries) {\n        if (entry.isIntersecting) {\n          entry.target.classList.add('show');\n          observer.unobserve(entry.target);\n        }\n      }\n    }, { threshold: 0.15 });\n\n    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));\n  </script>\n</body>\n</html>\n`;
 }
 
 // md 파일 1개를 읽어 파싱하고, 대응하는 recipes/{slug}.html을 갱신한다.
@@ -228,6 +253,8 @@ function convertMarkdownFile(filePath) {
   const slug = frontmatter.slug;
   const youtubeUrl = frontmatter.youtube_url || '';
   const blogUrl = frontmatter.blog_url || '';
+  const imageUrls = parseCommaValues(frontmatter.image_urls || frontmatter.image_url || frontmatter.image || '');
+  const imageAlts = parseCommaValues(frontmatter.image_alts || frontmatter.image_alt || '');
   const tags = parseTags(frontmatter.tags || '');
 
   if (!title || !slug) {
@@ -236,7 +263,7 @@ function convertMarkdownFile(filePath) {
 
   const ingredients = parseBulletItems(parseSection(body, '재료'));
   const steps = parseOrderedItems(parseSection(body, '조리과정'));
-  const summary = buildRecipeSummary(frontmatter, youtubeUrl, blogUrl);
+  const summary = buildRecipeSummary(frontmatter, youtubeUrl, blogUrl, imageUrls);
   logVerbose(`요약: ${summary}`);
 
   if (!ingredients.length || !steps.length) {
@@ -245,7 +272,7 @@ function convertMarkdownFile(filePath) {
 
   logVerbose(`파싱 완료: slug=${slug}, 태그=${tags.length}개, 재료=${ingredients.length}개, 조리과정=${steps.length}개`);
 
-  const html = buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, tags });
+  const html = buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, imageUrls, imageAlts, tags });
   const outputPath = path.join(outputDir, `${slug}.html`);
 
   fs.writeFileSync(outputPath, html, 'utf8');

@@ -15,7 +15,8 @@ plan.md 기준으로 만든 GitHub Pages 배포용 정적 사이트입니다.
 ## 레시피 추가 방법
 1. 레시피 원본 추가
 - 레시피 모음/ 에 slug 규칙(영문 소문자 + 하이픈)으로 Markdown 파일 추가
-- 필수 항목: title, slug, youtube_url, 재료, 조리과정
+- 필수 항목: title, slug, 재료, 조리과정
+- 선택 항목: youtube_url, blog_url, image_url, image_alt, image_urls, image_alts, tags, summary
 
 2. 상세 HTML 추가
 - recipes/slug.html 파일 생성
@@ -57,4 +58,6 @@ plan.md 기준으로 만든 GitHub Pages 배포용 정적 사이트입니다.
 
 주의:
 - Markdown frontmatter에 `title`, `slug`는 필수입니다.
-- 링크는 `youtube_url` 또는 `blog_url`을 사용할 수 있습니다.
+- 외부 콘텐츠는 `youtube_url`, `blog_url`, `image_url`을 함께 또는 선택적으로 사용할 수 있습니다.
+- 이미지 설명이 필요하면 `image_alt`를 함께 입력하세요.
+- 이미지가 2장 이상이면 `image_urls`, `image_alts`를 콤마로 구분해 입력하세요.

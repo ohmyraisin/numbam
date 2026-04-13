@@ -1,7 +1,7 @@
 ---
 title: 양배추스프
 slug: cabbage-soup
-blog_url: https://m.blog.naver.com/bebe_moo/223832655179
+image_urls: ../assets/images/양배추스프.jpeg
 tags: 양배추, 스프
 summary: 양배추로 만드는 국물 요리 레시피입니다.
 ---
