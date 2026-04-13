@@ -41,3 +41,20 @@ plan.md 기준으로 만든 GitHub Pages 배포용 정적 사이트입니다.
 - 링크 공유 중심 운영이므로 검색 노출 최소화를 위해 noindex 메타를 유지합니다.
 - 완전 비공개는 GitHub Pages 단독으로 불가능합니다.
 - 영상 비공개/삭제 시 상세 페이지에 대체 안내 문구를 표시하세요.
+
+## Markdown 변경 시 HTML 자동 업데이트
+`레시피 모음/*.md` 파일을 수정하면 `recipes/*.html`을 자동으로 다시 생성할 수 있습니다.
+
+1. 최초 1회 생성
+- npm run build:recipes
+
+2. 감시 모드(자동 업데이트)
+- npm run watch:recipes
+
+3. 상세 로그 모드(verbose)
+- 1회 실행: npm run build:recipes -- --verbose
+- 감시 실행: npm run watch:recipes -- --verbose
+
+주의:
+- Markdown frontmatter에 `title`, `slug`는 필수입니다.
+- 링크는 `youtube_url` 또는 `blog_url`을 사용할 수 있습니다.

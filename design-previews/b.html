@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>시안 B - Matcha Editorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f1efe8;
+      --paper: #fbfaf6;
+      --text: #252525;
+      --muted: #5b5b5b;
+      --line: #d7d2c4;
+      --matcha: #5f6f52;
+      --earth: #b99470;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", sans-serif;
+      color: var(--text);
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.28) 0px,
+          rgba(255, 255, 255, 0.28) 1px,
+          transparent 1px,
+          transparent 18px
+        ),
+        var(--bg);
+      line-height: 1.75;
+    }
+
+    .wrap {
+      width: min(980px, 92vw);
+      margin: 0 auto;
+      padding: 28px 0 52px;
+    }
+
+    .hero {
+      border-top: 3px solid var(--matcha);
+      background: var(--paper);
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 26px;
+    }
+
+    .kicker {
+      margin: 0;
+      color: var(--matcha);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: "Noto Serif JP", serif;
+      margin: 10px 0 8px;
+      font-size: clamp(1.7rem, 4.8vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .list {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 16px 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--matcha);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .recipe-title {
+      margin: 6px 0;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--earth);
+      color: #5f4631;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    ol {
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    @media (min-width: 820px) {
+      .list { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="kicker">MATCHA EDITORIAL</p>
+      <h1>일본 가정식 잡지형 레이아웃</h1>
+      <p>타이포 대비와 섹션 구분선을 활용한 편집형 시안입니다.</p>
+    </header>
+
+    <section class="list">
+      <article class="panel">
+        <h2>목록 페이지 예시</h2>
+        <p class="recipe-title">약밥</p>
+        <p>카드보다 패널 느낌이 강하고, 줄과 간격으로 정보를 정리합니다.</p>
+        <a class="btn" href="#">상세 보기</a>
+      </article>
+
+      <article class="panel">
+        <h2>상세 페이지 예시</h2>
+        <p><strong>조리과정</strong></p>
+        <ol>
+          <li>찹쌀을 충분히 불립니다.</li>
+          <li>대추/밤을 손질하고 우린 물을 준비합니다.</li>
+          <li>밥솥 취사 후 참기름으로 마무리합니다.</li>
+        </ol>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

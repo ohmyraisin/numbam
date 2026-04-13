@@ -6,41 +6,95 @@
   <title>아기 이유식 레시피북</title>
   <meta name="description" content="아기 이유식 레시피를 영상과 함께 공유하는 페이지입니다.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <div class="page-bg" aria-hidden="true"></div>
   <header class="hero">
     <p class="hero-kicker">RECIPE NOTE</p>
-    <h1>맘스터치 레시피북</h1>
-    <p>냠냠뱀뱀 동호회 엄마들이 만드는 수제 유아식</p>
+    <h1>냠냠뱀뱀 레시피북</h1>
+    <p>유아식 레시피북 입니다.</p>
   </header>
 
   <main class="container">
     <section class="intro card reveal">
-      <h2>읽는 순서</h2>
-      <p>레시피는 글을 먼저 읽고, 영상은 아래에서 확인하도록 구성되어 있어요.</p>
+      <h2>공지사항</h2>
+      <ul class="notice-list">
+        <li>먼저 도착한 사람이 주문한 재료와 열쇠를 받아 준비를 시작해주세요.</li>
+        <li>한살림에서 구매한 재료를 모아서 사진으로 기록해주세요.(리뷰용)</li>
+        <li>주방 정돈 후, 체크리스트를 작성하고 정돈된 상태를 사진으로 기록하세요.</li>
+      </ul>
     </section>
 
     <section class="recipes">
       <h2>레시피 목록</h2>
+      <div class="search-wrap card reveal" aria-label="레시피 검색">
+        <label class="search-label" for="recipe-search">검색</label>
+        <input id="recipe-search" class="search-input" type="search" placeholder="이름, 설명, 태그로 검색 (예: 찹쌀, 김치)">
+        <p id="search-count" class="search-count" aria-live="polite"></p>
+      </div>
       <ul class="recipe-grid">
-        <li class="card reveal">
-          <p class="label">첫 번째 레시피</p>
+        <!-- AUTO_RECIPE_CARDS_START -->
+        <li class="card reveal recipe-item" data-search="양배추스프 양배추로 만드는 국물 요리 레시피입니다. 양배추 스프 양배추 2장 양파 1/2개 감자 1/2개 두유 1봉지 현미가루 2큰술 현미유 2큰술 월계수잎 1장 방울양배추 3개 물 3컵 소금 약간 후추 약간 양파와 감자는 채 썰고, 양배추는 한입 크기로 썰고 방울양배추는 현미유, 소 금, 후추로 버무려둔다. 냄비에 현미유를 두르고 중불에서 양파를 볶다가 양파가 투명해지면, 감자와 양배추를 순서대로 넣고 소금과 후추로 간하여 5분간 볶는다. 양배추가 물러지면 물을 1컵 붓고 뚜껑을 덮어 강불에서 5분간 더 끓이다 불 을 끄고 식힌 후 블렌더로 곱게 간다. 두유에 현미가루를 넣고 잘 섞어 ③에 붓고 물 1컵과 월계수잎을 넣고 강불로 끓인다. 스프가 끓기 시작하면 약불로 줄이고 물 1컵을 조금씩 나눠 부으며, 향으로 천천히 저어 걸쭉해질 때까지 약 10분간 익힌다. 방울양배추를 200°C로 예열된 오븐에서 6분간 굽는다. 스프를 그릇에 담고 구운 방울양배추를 올린다." data-tags="양배추,스프">
+          <p class="label">Recipe 01</p>
+          <h3>양배추스프</h3>
+          <p>양배추로 만드는 국물 요리 레시피입니다.</p>
+      <p class="tag-list" aria-label="태그">
+        <span class="tag-chip">#양배추</span>
+        <span class="tag-chip">#스프</span>
+      </p>
+          <a class="btn" href="recipes/cabbage-soup.html">상세 보기</a>
+        </li>
+        <li class="card reveal recipe-item" data-search="노계란 뇨끼 계란 없이 만드는 감자 뇨끼 레시피입니다. 감자 노계란 뇨끼 감자 전분(감자전분, 쌀가루) 소금 올리브오일 파마산치즈 파우더 삶은 감자를 준비한다. 매셔로 으깨고 전분을 넣어 반죽을 만든다." data-tags="감자,노계란,뇨끼">
+          <p class="label">Recipe 02</p>
+          <h3>노계란 뇨끼</h3>
+          <p>계란 없이 만드는 감자 뇨끼 레시피입니다.</p>
+      <p class="tag-list" aria-label="태그">
+        <span class="tag-chip">#감자</span>
+        <span class="tag-chip">#노계란</span>
+        <span class="tag-chip">#뇨끼</span>
+      </p>
+          <a class="btn" href="recipes/gnocchi.html">상세 보기</a>
+        </li>
+        <li class="card reveal recipe-item" data-search="양파풋귤절임 양파와 풋귤즙으로 만드는 절임 반찬 레시피입니다. 절임 김치 양파 귤 양파 2개 (400g) 뜨거운 물 3컵 마늘 5개 말린 고추 1/2개 유기농 풋귤즙 200ml 토마토식초 100ml 설탕 2T 소금 1/2T 마늘은 슬라이스한다. 양파는 0.5cm 두께로 채 썰고 뜨거운 물에 1분 정도 담가 둔다. 양파를 체에 밭쳐 물기를 눌러 뺀다. 절임물 재료를 모두 넣은 후 설탕과 소금이 녹도록 저어 준다. 병에 양파와 나머지 향신 재료를 넣은 후 절임물을 부어 마무리한다." data-tags="절임,김치,양파,귤">
+          <p class="label">Recipe 03</p>
+          <h3>양파풋귤절임</h3>
+          <p>양파와 풋귤즙으로 만드는 절임 반찬 레시피입니다.</p>
+      <p class="tag-list" aria-label="태그">
+        <span class="tag-chip">#절임</span>
+        <span class="tag-chip">#김치</span>
+        <span class="tag-chip">#양파</span>
+        <span class="tag-chip">#귤</span>
+      </p>
+          <a class="btn" href="recipes/greentangerine.html">상세 보기</a>
+        </li>
+        <li class="card reveal recipe-item" data-search="파프리카 물김치 파프리카와 배추로 만드는 시원한 물김치 레시피입니다. 김치 발효 배추 파프리카 흰밥 6숟가락 알배추 3-4개 양파 2개 사과 2개 배 2개 파프리카 빨강 1개 천일염 참치액 60ml 매실액 60ml 물 480ml 배추와 파프리카 썰기 소금에 한시간 절이기 (흰김치) (빨간김치) 배+사과+양파+빨간파프리카+마늘+물+매실+참치액+밥 넣고 갈기 배추 물에 씻고 양념장에 비비기" data-tags="김치,발효,배추,파프리카">
+          <p class="label">Recipe 04</p>
           <h3>파프리카 물김치</h3>
-          <p>재료와 조리과정을 먼저 읽고, 하단 영상으로 흐름을 확인하세요.</p>
+          <p>파프리카와 배추로 만드는 시원한 물김치 레시피입니다.</p>
+      <p class="tag-list" aria-label="태그">
+        <span class="tag-chip">#김치</span>
+        <span class="tag-chip">#발효</span>
+        <span class="tag-chip">#배추</span>
+        <span class="tag-chip">#파프리카</span>
+      </p>
           <a class="btn" href="recipes/paprika-mulkimchi.html">상세 보기</a>
         </li>
-        <li class="card reveal">
-          <p class="label">두 번째 레시피</p>
+        <li class="card reveal recipe-item" data-search="약밥 찹쌀과 대추, 밤으로 만드는 달콤한 약밥 레시피입니다. 찹쌀 간식 약밥 대추 찹쌀 3컵 대추 8알 밤 10알 배도라지즙 1포 참기름 소량 찹쌀을 깨끗하게 씻어서 불리기. 물이 투명한 색이 될때까지 충분히 씻고, 30분에서 1시간정도 불리기 밤은 먹기 좋은 사이즈로 자르기 대추는 씨를 제거하고 자르기. 대추 위아랫부분을 자른 것과 씨는 버리지 않고 활용한다. 물 250미리에 대추씨, 속살, 겉부분을 넣고 끓여서 우려준다. 불린 찹쌀 위에 대추, 밤을 올리고 배도라지즙 1포와 대추우린물 100미리를 넣어준다. 전기밥솥에 백미 취사 밥이 다 되면 참기름을 소량 넣고 저어준 후, 한김 식혀준다. 틀에 넣어 모양 만들기 완전히 식힌 후 자르기" data-tags="찹쌀,간식,약밥,대추">
+          <p class="label">Recipe 05</p>
           <h3>약밥</h3>
-          <p>레시피 원문 파일을 바로 열어봅니다.</p>
+          <p>찹쌀과 대추, 밤으로 만드는 달콤한 약밥 레시피입니다.</p>
+      <p class="tag-list" aria-label="태그">
+        <span class="tag-chip">#찹쌀</span>
+        <span class="tag-chip">#간식</span>
+        <span class="tag-chip">#약밥</span>
+        <span class="tag-chip">#대추</span>
+      </p>
           <a class="btn" href="recipes/yakbob.html">상세 보기</a>
         </li>
+        <!-- AUTO_RECIPE_CARDS_END -->
       </ul>
+      <p id="empty-state" class="empty-state" hidden>검색 결과가 없습니다. 다른 키워드를 입력해보세요.</p>
     </section>
   </main>
 
@@ -59,6 +113,35 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const searchInput = document.getElementById('recipe-search');
+    const recipeItems = Array.from(document.querySelectorAll('.recipe-item'));
+    const searchCount = document.getElementById('search-count');
+    const emptyState = document.getElementById('empty-state');
+
+    function normalize(value) {
+      return value.toLowerCase().trim();
+    }
+
+    function runSearch() {
+      const keyword = normalize(searchInput.value);
+      let visibleCount = 0;
+
+      for (const item of recipeItems) {
+        const text = normalize(`${item.dataset.search || ''} ${item.dataset.tags || ''}`);
+        const matched = !keyword || text.includes(keyword);
+        item.hidden = !matched;
+        if (matched) {
+          visibleCount += 1;
+        }
+      }
+
+      searchCount.textContent = `검색 결과 ${visibleCount}개`;
+      emptyState.hidden = visibleCount !== 0;
+    }
+
+    searchInput.addEventListener('input', runSearch);
+    runSearch();
   </script>
 </body>
 </html>

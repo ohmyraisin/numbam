@@ -1,14 +1,13 @@
 :root {
-  --bg-ink: #0f1f1c;
-  --bg-mint: #e8f4ea;
-  --bg-cream: #fff8ef;
-  --card: rgba(255, 255, 255, 0.76);
-  --line: #b7d3be;
-  --text: #19312d;
-  --muted: #47605a;
-  --accent: #2d8a60;
-  --accent-soft: #d8f0e2;
-  --shadow: 0 14px 34px rgba(18, 45, 37, 0.14);
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --paper-warm: #fff9f1;
+  --line: #ded6c9;
+  --text: #2f2a24;
+  --muted: #6a6258;
+  --accent: #a67c52;
+  --accent-soft: #f3e7d7;
+  --shadow: 0 8px 24px rgba(108, 90, 66, 0.1);
 }
 
 * {
@@ -23,8 +22,11 @@ body {
 
 body {
   color: var(--text);
-  font-family: "Nanum Gothic", sans-serif;
-  background: linear-gradient(135deg, var(--bg-mint) 0%, var(--bg-cream) 58%, #f8efe2 100%);
+  font-family: "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", sans-serif;
+  background:
+    radial-gradient(circle at 10% 8%, #fff6ea 0%, transparent 36%),
+    radial-gradient(circle at 90% 92%, #f1e8dc 0%, transparent 28%),
+    var(--bg);
   min-height: 100vh;
 }
 
@@ -33,29 +35,36 @@ body {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 8% 14%, rgba(45, 138, 96, 0.16) 0%, transparent 24%),
-    radial-gradient(circle at 94% 20%, rgba(255, 185, 107, 0.2) 0%, transparent 28%),
-    radial-gradient(circle at 50% 90%, rgba(79, 155, 116, 0.13) 0%, transparent 30%);
+    radial-gradient(circle at 16% 18%, rgba(166, 124, 82, 0.1) 0%, transparent 26%),
+    radial-gradient(circle at 87% 15%, rgba(235, 209, 175, 0.28) 0%, transparent 25%),
+    radial-gradient(circle at 50% 92%, rgba(195, 168, 136, 0.13) 0%, transparent 32%);
   z-index: -1;
 }
 
 .hero {
-  padding: 4.2rem 1.2rem 2rem;
-  text-align: center;
+  width: min(980px, 92%);
+  margin: 1.8rem auto 0;
+  padding: 1.8rem;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fffaf2 0%, #f8f2e9 100%);
+  box-shadow: var(--shadow);
   animation: lift-in 760ms ease-out both;
 }
 
 .hero-kicker {
   margin: 0;
-  letter-spacing: 0.16em;
-  font-size: 0.74rem;
-  color: var(--muted);
+  color: var(--accent);
+  letter-spacing: 0.11em;
+  font-size: 0.73rem;
+  font-weight: 700;
 }
 
 .hero h1 {
-  margin: 0.6rem 0 0.75rem;
-  font-family: "Gowun Batang", serif;
-  font-size: clamp(1.8rem, 5.2vw, 3rem);
+  margin: 0.55rem 0 0.65rem;
+  font-size: clamp(1.65rem, 4.8vw, 2.4rem);
+  letter-spacing: -0.02em;
 }
 
 .hero p {
@@ -65,29 +74,76 @@ body {
 
 .container {
   width: min(980px, 92%);
-  margin: 0 auto 2rem;
+  margin: 0 auto 2.3rem;
 }
 
 .card {
-  background: var(--card);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: 14px;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(4px);
 }
 
 .intro {
-  padding: 1.25rem 1.4rem;
+  margin-top: 1rem;
+  padding: 1.2rem 1.3rem;
 }
 
-.intro h2,
-.recipes h2,
-.recipe-main h2 {
-  font-family: "Gowun Batang", serif;
+.notice-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.48rem;
+  color: #4f4438;
 }
 
 .recipes {
-  margin-top: 1.1rem;
+  margin-top: 1.25rem;
+}
+
+.search-wrap {
+  margin-bottom: 0.9rem;
+  padding: 0.95rem 1rem;
+}
+
+.search-label {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.search-input {
+  width: 100%;
+  border: 1px solid #d8cab8;
+  border-radius: 10px;
+  padding: 0.62rem 0.72rem;
+  background: #fffdf8;
+  color: var(--text);
+  font: inherit;
+}
+
+.search-input:focus {
+  outline: 2px solid rgba(166, 124, 82, 0.22);
+  border-color: var(--accent);
+}
+
+.search-count {
+  margin: 0.42rem 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.empty-state {
+  margin-top: 0.8rem;
+  color: var(--muted);
+}
+
+.recipes h2,
+.intro h2,
+.recipe-main h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
 }
 
 .recipe-grid {
@@ -100,33 +156,57 @@ body {
 }
 
 .recipe-grid li {
-  padding: 1rem;
+  padding: 1.05rem;
 }
 
 .label {
   margin: 0;
-  font-size: 0.8rem;
-  color: #6a7f77;
+  font-size: 0.76rem;
+  color: var(--accent);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
 h3 {
-  margin: 0.45rem 0;
+  margin: 0.45rem 0 0.38rem;
+  font-size: 1.18rem;
+  letter-spacing: -0.01em;
+}
+
+.tag-list {
+  margin: 0.45rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag-chip {
+  display: inline-block;
+  border: 1px solid #dac6ae;
+  background: #fff7eb;
+  color: #6f553a;
+  border-radius: 999px;
+  padding: 0.16rem 0.52rem;
+  font-size: 0.77rem;
+  font-weight: 700;
 }
 
 .btn {
   display: inline-block;
   margin-top: 0.7rem;
   text-decoration: none;
-  color: #0f201b;
-  background: linear-gradient(120deg, var(--accent-soft) 0%, #ffe7c4 100%);
-  border: 1px solid #c5decf;
+  color: #62482f;
+  background: var(--accent-soft);
+  border: 1px solid #dac6ae;
   padding: 0.62rem 0.9rem;
   border-radius: 999px;
   font-weight: 700;
+  transition: transform 180ms ease, border-color 180ms ease;
 }
 
 .btn:hover {
   transform: translateY(-1px);
+  border-color: var(--accent);
 }
 
 .footer {
@@ -139,47 +219,70 @@ h3 {
   width: min(980px, 92%);
   margin: 0 auto 2.4rem;
   display: grid;
-  gap: 1rem;
+  gap: 0.95rem;
 }
 
 .recipe-head {
-  margin-top: 2rem;
+  margin-top: 1.8rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper-warm);
 }
 
 .recipe-head h1 {
   margin: 0;
-  font-family: "Gowun Batang", serif;
-  font-size: clamp(1.65rem, 4.6vw, 2.4rem);
+  font-size: clamp(1.5rem, 4.6vw, 2.15rem);
+  letter-spacing: -0.02em;
 }
 
 .recipe-head p {
-  margin: 0.4rem 0 0;
+  margin: 0.5rem 0 0;
   color: var(--muted);
 }
 
 .recipe-text {
-  padding: 1.1rem 1.2rem;
+  padding: 1.2rem;
 }
 
 .recipe-text h2 {
-  margin-top: 0;
+  margin-top: 0.2rem;
 }
 
 .recipe-text ol,
 .recipe-text ul {
-  padding-left: 1.15rem;
-  line-height: 1.7;
+  padding-left: 1.2rem;
+  line-height: 1.78;
+}
+
+.recipe-tags {
+  margin-top: 0.55rem;
 }
 
 .video-wrap {
-  padding: 0.9rem;
+  padding: 1rem;
 }
 
 .video-wrap iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 0;
-  border-radius: 16px;
+  border-radius: 12px;
+}
+
+.error-page {
+  padding-top: 2.4rem;
+}
+
+.error-panel {
+  padding: 1.4rem;
+  text-align: center;
+}
+
+.error-title {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.35rem, 4vw, 1.9rem);
+  letter-spacing: -0.02em;
 }
 
 .reveal {
@@ -206,10 +309,15 @@ h3 {
 
 @media (max-width: 680px) {
   .hero {
-    padding-top: 3rem;
+    margin-top: 1rem;
+    padding: 1.2rem;
   }
 
   .recipe-head {
-    margin-top: 1.2rem;
+    margin-top: 1rem;
+  }
+
+  .recipe-grid {
+    grid-template-columns: 1fr;
   }
 }

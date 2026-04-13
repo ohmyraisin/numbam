@@ -2,6 +2,8 @@
 title: 파프리카 물김치
 slug: paprika-mulkimchi
 youtube_url: https://youtu.be/diATcS7y9Jw?si=1HNUUJ3l1febpJwV
+tags: 김치, 발효, 배추, 파프리카
+summary: 파프리카와 배추로 만드는 시원한 물김치 레시피입니다.
 ---
 
 ## 재료

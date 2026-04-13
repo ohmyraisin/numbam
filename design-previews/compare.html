@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>디자인 시안 비교 - A vs B</title>
+  <style>
+    :root {
+      --bg: #f5f4f1;
+      --text: #222;
+      --card: #ffffff;
+      --line: #d8d8d8;
+      --accent: #3f5a3f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", sans-serif;
+    }
+
+    main {
+      width: min(1200px, 94vw);
+      margin: 0 auto;
+      padding: 24px 0 36px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.4rem, 3.6vw, 2rem);
+    }
+
+    .desc {
+      margin: 8px 0 16px;
+      color: #555;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .actions a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .actions a.primary {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+
+    .pane {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .pane header {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+      background: #f9f9f9;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 740px;
+      border: 0;
+      background: white;
+    }
+
+    @media (min-width: 1080px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>디자인 시안 비교</h1>
+    <p class="desc">A(Washi Light)와 B(Matcha Editorial)를 한 화면에서 비교해보세요.</p>
+
+    <div class="actions">
+      <a class="primary" href="a.html" target="_blank" rel="noopener noreferrer">A 전체 화면</a>
+      <a href="b.html" target="_blank" rel="noopener noreferrer">B 전체 화면</a>
+    </div>
+
+    <section class="grid">
+      <article class="pane">
+        <header>시안 A - Washi Light</header>
+        <iframe src="a.html" title="시안 A 미리보기"></iframe>
+      </article>
+
+      <article class="pane">
+        <header>시안 B - Matcha Editorial</header>
+        <iframe src="b.html" title="시안 B 미리보기"></iframe>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

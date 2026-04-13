@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>읽는 순서 개선안 - 6명 공지 보드(카드 1장)</title>
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --paper: #fffdf9;
+      --line: #ded6c9;
+      --text: #2f2a24;
+      --muted: #6a6258;
+      --accent: #a67c52;
+      --soft: #f3e7d7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(circle at 10% 8%, #fff6ea 0%, transparent 36%),
+        radial-gradient(circle at 90% 92%, #f1e8dc 0%, transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.72;
+    }
+
+    .wrap {
+      width: min(900px, 92vw);
+      margin: 0 auto;
+      padding: 30px 0 44px;
+    }
+
+    .notice-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(108, 90, 66, 0.08);
+    }
+
+    .kicker {
+      margin: 0;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 6px;
+      font-size: clamp(1.3rem, 4.2vw, 1.85rem);
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .steps {
+      margin: 14px 0 12px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+    }
+
+    .steps li {
+      border: 1px solid #e6dccf;
+      background: #fffaf3;
+      border-radius: 10px;
+      padding: 9px 10px;
+      font-size: 14px;
+      color: #584b3f;
+    }
+
+    .board-title {
+      margin: 12px 0 8px;
+      font-size: 0.97rem;
+      color: #6a4d30;
+      font-weight: 700;
+    }
+
+    .members {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .member {
+      border: 1px solid #e6dccf;
+      background: #fffaf3;
+      border-radius: 10px;
+      padding: 9px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #584b3f;
+    }
+
+    .role {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .state {
+      border: 1px solid #dbc6ac;
+      background: #fff5e7;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: #6f553a;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (min-width: 780px) {
+      .members {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="notice-card" aria-label="읽는 순서 공지 카드">
+      <p class="kicker">READ ORDER</p>
+      <h1>오늘의 진행 순서 공지</h1>
+      <p class="desc">To-do 없이, 카드 1장 안에서 6명 준비물 공유 상황을 함께 안내합니다.</p>
+
+      <ul class="steps">
+        <li>1. 레시피 선택</li>
+        <li>2. 아래 6명 준비 보드에서 담당과 상태 확인</li>
+        <li>3. 조리 시작 후 상세 페이지 영상 확인</li>
+      </ul>
+
+      <p class="board-title">6명 준비물 공유 보드</p>
+      <section class="members" aria-label="6명 준비 보드">
+        <article class="member">
+          <div>
+            <div class="name">구성원 1</div>
+            <div class="role">재료 구매</div>
+          </div>
+          <span class="state">준비완료</span>
+        </article>
+        <article class="member">
+          <div>
+            <div class="name">구성원 2</div>
+            <div class="role">손질 담당</div>
+          </div>
+          <span class="state">준비중</span>
+        </article>
+        <article class="member">
+          <div>
+            <div class="name">구성원 3</div>
+            <div class="role">조리도구 준비</div>
+          </div>
+          <span class="state">확인필요</span>
+        </article>
+        <article class="member">
+          <div>
+            <div class="name">구성원 4</div>
+            <div class="role">포장/용기</div>
+          </div>
+          <span class="state">준비완료</span>
+        </article>
+        <article class="member">
+          <div>
+            <div class="name">구성원 5</div>
+            <div class="role">보관 담당</div>
+          </div>
+          <span class="state">준비중</span>
+        </article>
+        <article class="member">
+          <div>
+            <div class="name">구성원 6</div>
+            <div class="role">마무리 점검</div>
+          </div>
+          <span class="state">확인필요</span>
+        </article>
+      </section>
+
+      <p class="note">단일 카드이므로 모바일에서도 한 번에 공유 상태를 확인하기 쉽습니다.</p>
+    </section>
+  </main>
+</body>
+</html>

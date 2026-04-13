@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>읽는 순서 개선안 비교</title>
+  <style>
+    :root {
+      --bg: #f5f4f1;
+      --text: #222;
+      --line: #d8d8d8;
+      --card: #fff;
+      --accent: #7b5a3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", sans-serif;
+    }
+    main {
+      width: min(1220px, 94vw);
+      margin: 0 auto;
+      padding: 22px 0 34px;
+    }
+    h1 { margin: 0; font-size: clamp(1.35rem, 3.4vw, 1.95rem); }
+    .desc { margin: 8px 0 14px; color: #555; }
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .actions a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .actions a.primary { border-color: var(--accent); color: var(--accent); }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .pane {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .pane header {
+      padding: 10px 12px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--line);
+      background: #f9f9f9;
+    }
+    iframe {
+      width: 100%;
+      height: 760px;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+    @media (min-width: 1080px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>읽는 순서 영역 개선안 비교</h1>
+    <p class="desc">최신 요구사항은 "6명 공유 + 카드 1장"이며, 아래 버튼에서 최신 샘플을 바로 확인할 수 있어요.</p>
+
+    <div class="actions">
+      <a class="primary" href="read-order-simple.html" target="_blank" rel="noopener noreferrer">심플형 전체 보기</a>
+      <a href="read-order-board.html" target="_blank" rel="noopener noreferrer">보드형 전체 보기</a>
+      <a href="read-order-simple-notice-card.html" target="_blank" rel="noopener noreferrer">최신안: 6명 공지 보드 1장</a>
+    </div>
+
+    <section class="grid">
+      <article class="pane">
+        <header>심플형: 3단계 + 공용 To-do</header>
+        <iframe src="read-order-simple.html" title="읽는 순서 심플형"></iframe>
+      </article>
+      <article class="pane">
+        <header>보드형: 6명 상태 + 공용 To-do</header>
+        <iframe src="read-order-board.html" title="읽는 순서 보드형"></iframe>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

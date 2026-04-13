@@ -1,0 +1,8 @@
+{
+  "name": "recipe-book",
+  "private": true,
+  "scripts": {
+    "build:recipes": "node scripts/sync-recipes.js",
+    "watch:recipes": "node scripts/sync-recipes.js --watch"
+  }
+}

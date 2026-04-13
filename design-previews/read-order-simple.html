@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>읽는 순서 개선안 - 심플형</title>
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --paper: #fffdf9;
+      --line: #ded6c9;
+      --text: #2f2a24;
+      --muted: #6a6258;
+      --accent: #a67c52;
+      --soft: #f3e7d7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(circle at 10% 8%, #fff6ea 0%, transparent 36%),
+        radial-gradient(circle at 90% 92%, #f1e8dc 0%, transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.72;
+    }
+    .wrap {
+      width: min(940px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(108, 90, 66, 0.08);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.34rem, 4.2vw, 1.9rem);
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .steps {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+    .step {
+      border: 1px solid var(--line);
+      background: #fffaf3;
+      border-radius: 12px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      border: 1px solid #ddcab2;
+      color: #6a4d30;
+      font-weight: 800;
+    }
+    .step h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+    .step p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .todo {
+      margin-top: 14px;
+      border: 1px dashed #ccb79d;
+      border-radius: 12px;
+      background: #fffaf4;
+      padding: 12px;
+    }
+    .todo h3 {
+      margin: 0 0 10px;
+      font-size: 0.98rem;
+      color: #6a4d30;
+    }
+    .todo ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .todo li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+    }
+    .todo input { width: 16px; height: 16px; }
+    .tip {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel">
+      <h1>읽는 순서 안내(심플형)</h1>
+      <p class="sub">기존 읽는 순서 영역을 간단한 3단계 + 공용 To-do로 정리한 버전</p>
+
+      <div class="steps">
+        <article class="step">
+          <div class="num">1</div>
+          <div>
+            <h2>레시피 선택</h2>
+            <p>오늘 만들 메뉴를 선택하고 상세 페이지로 이동합니다.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="num">2</div>
+          <div>
+            <h2>준비물 체크</h2>
+            <p>재료와 도구를 확인하고 누락 항목을 체크합니다.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="num">3</div>
+          <div>
+            <h2>조리 시작</h2>
+            <p>조리과정을 순서대로 진행하고 마지막에 영상으로 확인합니다.</p>
+          </div>
+        </article>
+      </div>
+
+      <section class="todo">
+        <h3>공용 To-do</h3>
+        <ul>
+          <li><input type="checkbox" checked>재료 구매 완료</li>
+          <li><input type="checkbox">재료 손질 완료</li>
+          <li><input type="checkbox">조리 시작 준비</li>
+          <li><input type="checkbox">배분/보관 용기 준비</li>
+        </ul>
+      </section>
+
+      <p class="tip">장점: 가장 단순하고 빠르게 이해됨 / 단점: 6명별 상태 공유는 어려움</p>
+    </section>
+  </main>
+</body>
+</html>

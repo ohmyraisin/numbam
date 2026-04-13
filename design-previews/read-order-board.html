@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>읽는 순서 개선안 - 보드형</title>
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --paper: #fffdf9;
+      --line: #ded6c9;
+      --text: #2f2a24;
+      --muted: #6a6258;
+      --accent: #a67c52;
+      --ok: #5f7b5f;
+      --progress: #bf8f64;
+      --hold: #9a9a9a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(circle at 12% 9%, #fff6ea 0%, transparent 36%),
+        radial-gradient(circle at 92% 90%, #efe3d4 0%, transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.72;
+    }
+    .wrap {
+      width: min(960px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(108, 90, 66, 0.08);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.34rem, 4.2vw, 1.9rem);
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .topline {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meter {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      width: 190px;
+      height: 9px;
+      overflow: hidden;
+      background: #f5eee3;
+    }
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: 66%;
+      background: linear-gradient(90deg, #c79a72, #8f6c4a);
+    }
+    .board {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .member {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffaf3;
+      padding: 11px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+    .name { font-weight: 700; }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .state {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid #dbc6ac;
+      background: #fff5e7;
+      color: #6f553a;
+      white-space: nowrap;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 999px; }
+    .ok { background: var(--ok); }
+    .progress { background: var(--progress); }
+    .hold { background: var(--hold); }
+    .todo {
+      margin-top: 12px;
+      border: 1px dashed #ccb79d;
+      border-radius: 12px;
+      background: #fffaf4;
+      padding: 12px;
+    }
+    .todo h2 { margin: 0 0 8px; font-size: 1rem; }
+    .todo ul { margin: 0; padding-left: 18px; }
+    .todo li { margin: 4px 0; font-size: 14px; }
+    .tip { margin-top: 10px; color: var(--muted); font-size: 13px; }
+    @media (min-width: 780px) {
+      .board { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel">
+      <h1>읽는 순서 + 6명 준비 보드(보드형)</h1>
+      <p class="sub">공용 To-do와 구성원별 준비 상태를 함께 보여주는 버전</p>
+
+      <div class="topline">
+        <span>오늘 준비 현황: 12/18 완료</span>
+        <div class="meter"><span></span></div>
+      </div>
+
+      <section class="board" aria-label="6명 준비 보드">
+        <article class="member">
+          <div><div class="name">엄마 1</div><div class="meta">재료 구매 담당</div></div>
+          <span class="state"><span class="dot ok"></span>준비완료</span>
+        </article>
+        <article class="member">
+          <div><div class="name">엄마 2</div><div class="meta">손질 담당</div></div>
+          <span class="state"><span class="dot progress"></span>준비중</span>
+        </article>
+        <article class="member">
+          <div><div class="name">엄마 3</div><div class="meta">조리도구 담당</div></div>
+          <span class="state"><span class="dot hold"></span>미정</span>
+        </article>
+        <article class="member">
+          <div><div class="name">엄마 4</div><div class="meta">포장 담당</div></div>
+          <span class="state"><span class="dot ok"></span>준비완료</span>
+        </article>
+        <article class="member">
+          <div><div class="name">엄마 5</div><div class="meta">보관 담당</div></div>
+          <span class="state"><span class="dot progress"></span>준비중</span>
+        </article>
+        <article class="member">
+          <div><div class="name">엄마 6</div><div class="meta">정리 담당</div></div>
+          <span class="state"><span class="dot hold"></span>미정</span>
+        </article>
+      </section>
+
+      <section class="todo">
+        <h2>공용 To-do</h2>
+        <ul>
+          <li>레시피 선택 후 담당 배정</li>
+          <li>누락 재료 체크</li>
+          <li>조리 시작 전 준비물 최종 확인</li>
+          <li>완료 후 배분/보관 상태 기록</li>
+        </ul>
+      </section>
+
+      <p class="tip">장점: 6명 협업 상태가 즉시 보임 / 단점: 심플형보다 정보량이 많음</p>
+    </section>
+  </main>
+</body>
+</html>

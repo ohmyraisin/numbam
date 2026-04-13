@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>양배추스프 | 아기 이유식 레시피북</title>
+  <meta name="description" content="양배추스프 이유식 레시피입니다.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="recipe-main">
+    <header class="recipe-head reveal">
+      <a class="btn" href="../index.html">목록으로 돌아가기</a>
+      <h1>양배추스프</h1>
+      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상 또는 참고 링크를 확인하세요.</p>
+      <p class="tag-list recipe-tags" aria-label="태그">
+        <span class="tag-chip">#양배추</span>
+        <span class="tag-chip">#스프</span>
+      </p>
+    </header>
+
+    <section class="card recipe-text reveal">
+      <h2>재료</h2>
+      <ul>
+        <li>양배추 2장</li>
+        <li>양파 1/2개</li>
+        <li>감자 1/2개</li>
+        <li>두유 1봉지</li>
+        <li>현미가루 2큰술</li>
+        <li>현미유 2큰술</li>
+        <li>월계수잎 1장</li>
+        <li>방울양배추 3개</li>
+        <li>물 3컵</li>
+        <li>소금 약간</li>
+        <li>후추 약간</li>
+      </ul>
+
+      <h2>조리과정</h2>
+      <ol>
+        <li>양파와 감자는 채 썰고, 양배추는 한입 크기로 썰고 방울양배추는 현미유, 소 금, 후추로 버무려둔다.</li>
+        <li>냄비에 현미유를 두르고 중불에서 양파를 볶다가 양파가 투명해지면, 감자와 양배추를 순서대로 넣고 소금과 후추로 간하여 5분간 볶는다.</li>
+        <li>양배추가 물러지면 물을 1컵 붓고 뚜껑을 덮어 강불에서 5분간 더 끓이다 불 을 끄고 식힌 후 블렌더로 곱게 간다.</li>
+        <li>두유에 현미가루를 넣고 잘 섞어 ③에 붓고 물 1컵과 월계수잎을 넣고 강불로 끓인다.</li>
+        <li>스프가 끓기 시작하면 약불로 줄이고 물 1컵을 조금씩 나눠 부으며, 향으로 천천히 저어 걸쭉해질 때까지 약 10분간 익힌다.</li>
+        <li>방울양배추를 200°C로 예열된 오븐에서 6분간 굽는다.</li>
+        <li>스프를 그릇에 담고 구운 방울양배추를 올린다.</li>
+      </ol>
+    </section>
+
+    <section class="card video-wrap reveal" aria-label="참고 링크">
+      <h2>참고 링크</h2>
+      <a href="https://m.blog.naver.com/bebe_moo/223832655179" target="_blank" rel="noopener noreferrer" class="btn">블로그에서 보기</a>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
