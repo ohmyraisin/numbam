@@ -230,6 +230,11 @@ h3 {
   background: var(--paper-warm);
 }
 
+.recipe-head .btn {
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+}
+
 .recipe-head h1 {
   margin: 0;
   font-size: clamp(1.5rem, 4.6vw, 2.15rem);
