@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>밥만두 | 아기 이유식 레시피북</title>
+  <meta name="description" content="밥만두 이유식 레시피입니다.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="recipe-main">
+    <header class="recipe-head reveal">
+      <a class="btn" href="../index.html">목록으로 돌아가기</a>
+      <h1>밥만두</h1>
+      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상/블로그/이미지를 확인하세요.</p>
+      <p class="tag-list recipe-tags" aria-label="태그">
+        <span class="tag-chip">#돼지고기</span>
+        <span class="tag-chip">#밥</span>
+        <span class="tag-chip">#만두</span>
+      </p>
+    </header>
+
+    <section class="card recipe-text reveal">
+      <h2>재료</h2>
+      <ul>
+        <li>돼지고기 안심 200g</li>
+        <li>알배추 100g</li>
+        <li>부추 40g</li>
+        <li>두부 150g</li>
+        <li>다진마늘 1T</li>
+        <li>밥 (3국자 가득)</li>
+        <li>들깨가루 3T</li>
+        <li>만두피</li>
+      </ul>
+
+      <h2>조리과정</h2>
+      <ol>
+        <li>야채와 고기 다져서 준비</li>
+        <li>두부 물기 짜서 준비</li>
+        <li>모든 재료 넣고 섞기</li>
+        <li>만두피 (마포식품 생손만두피) 반으로 잘라서 소 넣고 빚기</li>
+      </ol>
+    </section>
+
+    <section class="card video-wrap reveal" aria-label="블로그 링크">
+      <h2>블로그 링크</h2>
+      <a href="https://www.instagram.com/reel/DV92r2FE46l/?igsh=MTZzdDJsYWZ5anY1bA%3D%3D" target="_blank" rel="noopener noreferrer" class="btn">블로그에서 보기</a>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
