@@ -13,17 +13,26 @@ plan.md 기준으로 만든 GitHub Pages 배포용 정적 사이트입니다.
 브라우저로 index.html 파일을 열면 바로 확인할 수 있습니다.
 
 ## 레시피 추가 방법
+`recipes/*.html`과 `index.html` 카드는 스크립트가 생성하므로 직접 편집하지 않습니다.
+Markdown 원본만 추가한 뒤 스크립트를 실행하세요.
+
 1. 레시피 원본 추가
 - 레시피 모음/ 에 slug 규칙(영문 소문자 + 하이픈)으로 Markdown 파일 추가
 - 필수 항목: title, slug, 재료, 조리과정
 - 선택 항목: youtube_url, blog_url, image_url, image_alt, image_urls, image_alts, tags, summary
 
-2. 상세 HTML 추가
-- recipes/slug.html 파일 생성
-- 텍스트(재료/조리과정)를 먼저 배치하고 영상은 아래에 배치
+2. 스크립트 실행
+- npm run build:recipes
+- `레시피 모음/*.md` 전체를 다시 읽어 `recipes/{slug}.html`을 생성/갱신합니다.
+- 동시에 `index.html`의 카드 목록(AUTO_RECIPE_CARDS 마커 사이)도 slug 오름차순으로 다시 씁니다.
 
-3. 목록 반영
-- index.html에 카드 1개 추가 후 상세 페이지 링크 연결
+3. 결과 확인
+- recipes/{slug}.html 생성 여부와 index.html 카드 링크를 확인합니다.
+- 상세 페이지는 텍스트(재료/조리과정)가 먼저, 영상/블로그/이미지가 아래에 배치됩니다.
+
+주의:
+- slug를 바꾸면 이전 slug의 HTML 파일이 그대로 남습니다. 스크립트는 파일을 지우지 않으므로 직접 삭제하세요.
+- `index.html`의 AUTO_RECIPE_CARDS 마커 사이는 매 실행마다 덮어쓰이므로 직접 수정하지 마세요.
 
 ## GitHub Pages 배포(처음 하는 경우)
 1. GitHub에서 새 Public 저장소를 만듭니다.

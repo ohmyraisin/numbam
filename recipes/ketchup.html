@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>토마토케찹 | 아기 이유식 레시피북</title>
+  <meta name="description" content="토마토케찹 이유식 레시피입니다.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="recipe-main">
+    <header class="recipe-head reveal">
+      <a class="btn" href="../index.html">목록으로 돌아가기</a>
+      <h1>토마토케찹</h1>
+      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상/블로그/이미지를 확인하세요.</p>
+      <p class="tag-list recipe-tags" aria-label="태그">
+        <span class="tag-chip">#토마토</span>
+        <span class="tag-chip">#소스</span>
+        <span class="tag-chip">#케찹</span>
+        <span class="tag-chip">#케첩</span>
+      </p>
+    </header>
+
+    <section class="card recipe-text reveal">
+      <h2>재료</h2>
+      <ul>
+        <li>포미 토마토 퓨레 200g</li>
+        <li>사과즙 1팩 100~120g</li>
+        <li>사과사이다식초(혹은 현미식초) 1T</li>
+        <li>전분 1/2T 5g</li>
+      </ul>
+
+      <h2>조리과정</h2>
+      <ol>
+        <li>전분을 제외한 모든 재료를 냄비에 넣어준다.</li>
+        <li>가염 시, 소금 한꼬집 넣는다.</li>
+        <li>전분을 물 2스푼에 풀어 잘 개어 준다.</li>
+        <li>전분을 넣고 3~5분 정도 끓여 점성이 생기면 완성</li>
+        <li>식혀서 소분</li>
+      </ol>
+    </section>
+
+    <section class="card video-wrap reveal" aria-label="블로그 링크">
+      <h2>블로그 링크</h2>
+      <a href="https://m.blog.naver.com/lsshh1234/224155158378" target="_blank" rel="noopener noreferrer" class="btn">블로그에서 보기</a>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

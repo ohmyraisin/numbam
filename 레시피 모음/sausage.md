@@ -1,9 +1,9 @@
 ---
 title: 수제소세지
-slug: pork_sausage
+slug: sausage
 blog_url: https://www.10000recipe.com/recipe/6969222
 tags: 돼지고기, 소세지
-summary: 계란 없이 만드는 감자 뇨끼 레시피입니다.
+summary: 돼지고기로 만드는 수제 소세지 레시피 입니다.
 ---
 
 ## 재료
