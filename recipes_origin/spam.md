@@ -1,7 +1,7 @@
 ---
 title: 스팸
 slug: spam
-youtube_url: https://www.instagram.com/reel/DcgGW9yp-XL/?igsi=ejhjZHBna2R6N3Yx
+instagram_url: https://www.instagram.com/reel/DcgGW9yp-XL/?igsi=ejhjZHBna2R6N3Yx
 tags: 돼지고기, 스팸
 summary: 돼지고기로 만드는 아기용 스팸입니다.
 ---

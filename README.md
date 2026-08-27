@@ -7,7 +7,7 @@ plan.md 기준으로 만든 GitHub Pages 배포용 정적 사이트입니다.
 - 404.html: 잘못된 주소 접근 시 안내 페이지
 - recipes/: 레시피 상세 페이지
 - assets/styles.css: 공통 스타일
-- 레시피 모음/: 레시피 원본 Markdown
+- recipes_origin/: 레시피 원본 Markdown
 
 ## 로컬에서 보기
 브라우저로 index.html 파일을 열면 바로 확인할 수 있습니다.
@@ -17,13 +17,13 @@ plan.md 기준으로 만든 GitHub Pages 배포용 정적 사이트입니다.
 Markdown 원본만 추가한 뒤 스크립트를 실행하세요.
 
 1. 레시피 원본 추가
-- 레시피 모음/ 에 slug 규칙(영문 소문자 + 하이픈)으로 Markdown 파일 추가
+- recipes_origin/ 에 slug 규칙(영문 소문자 + 하이픈)으로 Markdown 파일 추가
 - 필수 항목: title, slug, 재료, 조리과정
-- 선택 항목: youtube_url, blog_url, image_url, image_alt, image_urls, image_alts, tags, summary
+- 선택 항목: youtube_url, instagram_url, blog_url, image_url, image_alt, image_urls, image_alts, tags, summary
 
 2. 스크립트 실행
 - npm run build:recipes
-- `레시피 모음/*.md` 전체를 다시 읽어 `recipes/{slug}.html`을 생성/갱신합니다.
+- `recipes_origin/*.md` 전체를 다시 읽어 `recipes/{slug}.html`을 생성/갱신합니다.
 - 동시에 `index.html`의 카드 목록(AUTO_RECIPE_CARDS 마커 사이)도 slug 오름차순으로 다시 씁니다.
 
 3. 결과 확인
@@ -53,7 +53,7 @@ Markdown 원본만 추가한 뒤 스크립트를 실행하세요.
 - 영상 비공개/삭제 시 상세 페이지에 대체 안내 문구를 표시하세요.
 
 ## Markdown 변경 시 HTML 자동 업데이트
-`레시피 모음/*.md` 파일을 수정하면 `recipes/*.html`을 자동으로 다시 생성할 수 있습니다.
+`recipes_origin/*.md` 파일을 수정하면 `recipes/*.html`을 자동으로 다시 생성할 수 있습니다.
 
 1. 최초 1회 생성
 - npm run build:recipes
@@ -67,6 +67,8 @@ Markdown 원본만 추가한 뒤 스크립트를 실행하세요.
 
 주의:
 - Markdown frontmatter에 `title`, `slug`는 필수입니다.
-- 외부 콘텐츠는 `youtube_url`, `blog_url`, `image_url`을 함께 또는 선택적으로 사용할 수 있습니다.
+- 외부 콘텐츠는 `youtube_url`, `instagram_url`, `blog_url`, `image_url`을 함께 또는 선택적으로 사용할 수 있습니다.
+- 인스타그램 릴스/게시물은 `instagram_url`에 넣으세요. `youtube_url`은 유튜브 주소만 인식합니다.
+  (`youtube_url`에 인스타그램 링크를 넣으면 경고를 출력하고 `instagram_url`로 처리합니다.)
 - 이미지 설명이 필요하면 `image_alt`를 함께 입력하세요.
 - 이미지가 2장 이상이면 `image_urls`, `image_alts`를 콤마로 구분해 입력하세요.

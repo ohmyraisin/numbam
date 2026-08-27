@@ -275,6 +275,20 @@ h3 {
   border-radius: 12px;
 }
 
+/* 인스타그램 릴스는 세로 영상이라 별도 비율을 사용한다. */
+.video-wrap iframe.instagram-embed {
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  aspect-ratio: 400 / 700;
+}
+
+.embed-fallback {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
 .media-wrap {
   padding: 1rem;
 }

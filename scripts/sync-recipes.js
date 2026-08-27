@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const projectRoot = path.resolve(__dirname, '..');
-const sourceDir = path.join(projectRoot, '레시피 모음');
+const sourceDir = path.join(projectRoot, 'recipes_origin');
 const outputDir = path.join(projectRoot, 'recipes');
 const indexPath = path.join(projectRoot, 'index.html');
 const args = new Set(process.argv.slice(2));
@@ -109,6 +109,21 @@ function getYoutubeVideoId(url) {
   return matched ? matched[1] : '';
 }
 
+// instagram_url에서 게시물 코드를 뽑아 embed URL을 만든다. (reel/reels/p/tv 지원)
+function getInstagramEmbedUrl(url) {
+  if (!url) {
+    return '';
+  }
+
+  const matched = url.match(/instagram\.com\/(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/);
+  if (!matched) {
+    return '';
+  }
+
+  const type = matched[1] === 'reels' ? 'reel' : matched[1];
+  return `https://www.instagram.com/${type}/${matched[2]}/embed`;
+}
+
 // 배열 데이터를 ul 또는 ol HTML 문자열로 렌더링한다.
 function renderList(items, type) {
   const tag = type === 'ol' ? 'ol' : 'ul';
@@ -180,12 +195,12 @@ function updateIndexRecipeCards(recipes) {
   logVerbose(`index 카드 자동 갱신: ${recipes.length}개`);
 }
 
-function buildRecipeSummary(frontmatter, youtubeUrl, blogUrl, imageUrls) {
+function buildRecipeSummary(frontmatter, youtubeUrl, blogUrl, imageUrls, instagramUrl) {
   if (frontmatter.summary) {
     return frontmatter.summary;
   }
 
-  if (youtubeUrl) {
+  if (youtubeUrl || instagramUrl) {
     return '재료와 조리과정을 먼저 읽고, 하단 영상으로 흐름을 확인하세요.';
   }
 
@@ -201,13 +216,18 @@ function buildRecipeSummary(frontmatter, youtubeUrl, blogUrl, imageUrls) {
 }
 
 // 외부 콘텐츠 영역(영상/블로그/이미지)을 조합해 렌더링한다.
-function renderContentSections(title, youtubeUrl, blogUrl, imageUrls, imageAlts) {
+function renderContentSections(title, youtubeUrl, blogUrl, imageUrls, imageAlts, instagramUrl) {
   const videoId = getYoutubeVideoId(youtubeUrl || '');
+  const instagramEmbedUrl = getInstagramEmbedUrl(instagramUrl || '');
   const safeTitle = escapeHtml(title);
   const sections = [];
 
   if (videoId) {
     sections.push(`    <section class="card video-wrap reveal" aria-label="조리 영상">\n      <h2>영상</h2>\n      <iframe\n        src="https://www.youtube.com/embed/${escapeHtml(videoId)}"\n        title="${safeTitle} 조리 영상"\n        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"\n        referrerpolicy="strict-origin-when-cross-origin"\n        allowfullscreen>\n      </iframe>\n    </section>`);
+  }
+
+  if (instagramEmbedUrl) {
+    sections.push(`    <section class="card video-wrap reveal" aria-label="인스타그램 영상">\n      <h2>영상</h2>\n      <iframe\n        class="instagram-embed"\n        src="${escapeHtml(instagramEmbedUrl)}"\n        title="${safeTitle} 조리 영상"\n        scrolling="no"\n        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"\n        referrerpolicy="strict-origin-when-cross-origin"\n        allowfullscreen>\n      </iframe>\n      <p class="embed-fallback"><a href="${escapeHtml(instagramUrl)}" target="_blank" rel="noopener noreferrer">영상이 보이지 않으면 인스타그램에서 열기</a></p>\n    </section>`);
   }
 
   if (blogUrl) {
@@ -234,25 +254,33 @@ function renderContentSections(title, youtubeUrl, blogUrl, imageUrls, imageAlts)
 }
 
 // 레시피 한 건의 최종 HTML 문서를 템플릿으로 생성한다.
-function buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, imageUrls, imageAlts, tags }) {
+function buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, imageUrls, imageAlts, tags, instagramUrl }) {
   const safeTitle = escapeHtml(title);
   const description = escapeHtml(`${title} 이유식 레시피입니다.`);
   const tagsMarkup = renderTags(tags, 'tag-list recipe-tags');
 
-  return `<!doctype html>\n<html lang="ko">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>${safeTitle} | 아기 이유식 레시피북</title>\n  <meta name="description" content="${description}">\n  <meta name="robots" content="noindex, nofollow">\n  <link rel="stylesheet" href="../assets/styles.css">\n</head>\n<body>\n  <div class="page-bg" aria-hidden="true"></div>\n\n  <main class="recipe-main">\n    <header class="recipe-head reveal">\n      <a class="btn" href="../index.html">목록으로 돌아가기</a>\n      <h1>${safeTitle}</h1>\n      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상/블로그/이미지를 확인하세요.</p>\n${tagsMarkup ? `${tagsMarkup}\n` : ''}    </header>\n\n    <section class="card recipe-text reveal">\n      <h2>재료</h2>\n${renderList(ingredients, 'ul')}\n\n      <h2>조리과정</h2>\n${renderList(steps, 'ol')}\n    </section>\n\n${renderContentSections(title, youtubeUrl, blogUrl, imageUrls, imageAlts)}\n  </main>\n\n  <script>\n    const observer = new IntersectionObserver((entries) => {\n      for (const entry of entries) {\n        if (entry.isIntersecting) {\n          entry.target.classList.add('show');\n          observer.unobserve(entry.target);\n        }\n      }\n    }, { threshold: 0.15 });\n\n    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));\n  </script>\n</body>\n</html>\n`;
+  return `<!doctype html>\n<html lang="ko">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>${safeTitle} | 아기 이유식 레시피북</title>\n  <meta name="description" content="${description}">\n  <meta name="robots" content="noindex, nofollow">\n  <link rel="stylesheet" href="../assets/styles.css">\n</head>\n<body>\n  <div class="page-bg" aria-hidden="true"></div>\n\n  <main class="recipe-main">\n    <header class="recipe-head reveal">\n      <a class="btn" href="../index.html">목록으로 돌아가기</a>\n      <h1>${safeTitle}</h1>\n      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상/블로그/이미지를 확인하세요.</p>\n${tagsMarkup ? `${tagsMarkup}\n` : ''}    </header>\n\n    <section class="card recipe-text reveal">\n      <h2>재료</h2>\n${renderList(ingredients, 'ul')}\n\n      <h2>조리과정</h2>\n${renderList(steps, 'ol')}\n    </section>\n\n${renderContentSections(title, youtubeUrl, blogUrl, imageUrls, imageAlts, instagramUrl)}\n  </main>\n\n  <script>\n    const observer = new IntersectionObserver((entries) => {\n      for (const entry of entries) {\n        if (entry.isIntersecting) {\n          entry.target.classList.add('show');\n          observer.unobserve(entry.target);\n        }\n      }\n    }, { threshold: 0.15 });\n\n    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));\n  </script>\n</body>\n</html>\n`;
 }
 
 // md 파일 1개를 읽어 파싱하고, 대응하는 recipes/{slug}.html을 갱신한다.
 function convertMarkdownFile(filePath) {
   const fileName = path.basename(filePath);
-  logVerbose(`읽는 중: 레시피 모음/${fileName}`);
+  logVerbose(`읽는 중: recipes_origin/${fileName}`);
   const raw = fs.readFileSync(filePath, 'utf8');
   const { frontmatter, body } = parseFrontmatter(raw, fileName);
 
   const title = frontmatter.title;
   const slug = frontmatter.slug;
-  const youtubeUrl = frontmatter.youtube_url || '';
+  let youtubeUrl = frontmatter.youtube_url || '';
+  let instagramUrl = frontmatter.instagram_url || '';
   const blogUrl = frontmatter.blog_url || '';
+
+  // youtube_url에 인스타그램 링크를 넣은 경우 조용히 누락되지 않도록 instagram_url로 넘긴다.
+  if (!instagramUrl && getInstagramEmbedUrl(youtubeUrl)) {
+    console.warn(`warn: ${fileName}: youtube_url에 인스타그램 링크가 있어 instagram_url로 처리합니다.`);
+    instagramUrl = youtubeUrl;
+    youtubeUrl = '';
+  }
   const imageUrls = parseCommaValues(frontmatter.image_urls || frontmatter.image_url || frontmatter.image || '');
   const imageAlts = parseCommaValues(frontmatter.image_alts || frontmatter.image_alt || '');
   const tags = parseTags(frontmatter.tags || '');
@@ -263,7 +291,7 @@ function convertMarkdownFile(filePath) {
 
   const ingredients = parseBulletItems(parseSection(body, '재료'));
   const steps = parseOrderedItems(parseSection(body, '조리과정'));
-  const summary = buildRecipeSummary(frontmatter, youtubeUrl, blogUrl, imageUrls);
+  const summary = buildRecipeSummary(frontmatter, youtubeUrl, blogUrl, imageUrls, instagramUrl);
   logVerbose(`요약: ${summary}`);
 
   if (!ingredients.length || !steps.length) {
@@ -272,7 +300,7 @@ function convertMarkdownFile(filePath) {
 
   logVerbose(`파싱 완료: slug=${slug}, 태그=${tags.length}개, 재료=${ingredients.length}개, 조리과정=${steps.length}개`);
 
-  const html = buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, imageUrls, imageAlts, tags });
+  const html = buildHtml({ title, ingredients, steps, youtubeUrl, blogUrl, imageUrls, imageAlts, tags, instagramUrl });
   const outputPath = path.join(outputDir, `${slug}.html`);
 
   fs.writeFileSync(outputPath, html, 'utf8');
@@ -317,7 +345,7 @@ function convertAllMarkdown() {
 
 // 파일 저장 시 여러 이벤트가 연속 발생할 수 있어 debounce(120ms)로 묶어서 처리한다.
 function watchMarkdown() {
-  console.log('watching: 레시피 모음/*.md');
+  console.log('watching: recipes_origin/*.md');
 
   let timer = null;
   fs.watch(sourceDir, (eventType, fileName) => {
