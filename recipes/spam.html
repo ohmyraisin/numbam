@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>스팸 | 아기 이유식 레시피북</title>
+  <meta name="description" content="스팸 이유식 레시피입니다.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="recipe-main">
+    <header class="recipe-head reveal">
+      <a class="btn" href="../index.html">목록으로 돌아가기</a>
+      <h1>스팸</h1>
+      <p>먼저 텍스트 레시피를 읽고, 마지막에 영상/블로그/이미지를 확인하세요.</p>
+      <p class="tag-list recipe-tags" aria-label="태그">
+        <span class="tag-chip">#돼지고기</span>
+        <span class="tag-chip">#스팸</span>
+      </p>
+    </header>
+
+    <section class="card recipe-text reveal">
+      <h2>재료</h2>
+      <ul>
+        <li>돼지고기 다짐육 200g</li>
+        <li>찐감자 60g</li>
+        <li>양파, 대파 각 10g</li>
+        <li>다진마늘 10g</li>
+        <li>전분 10g</li>
+      </ul>
+
+      <h2>조리과정</h2>
+      <ol>
+        <li>모든 재료를 초퍼에 넣고 곱게 간다.</li>
+        <li>스팸크기의 사각 통에 빈틈없이 담아낸 후, 물이 들어가지 않도록 랩을 짱짱하게 씌운다.</li>
+        <li>찜기에서 15-20분 가량 쪄주면 끝</li>
+      </ol>
+    </section>
+
+    <section class="card video-wrap reveal" aria-label="안내">
+      <h2>참고</h2>
+      <p>연결된 영상, 블로그 링크, 이미지가 없습니다.</p>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
